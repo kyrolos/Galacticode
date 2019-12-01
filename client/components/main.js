@@ -1,6 +1,8 @@
 import React from 'react'
 import planetBackground from './threejs/planetBackground'
 
+import {signInWithGoogle} from '../../firebase/firebase.utils';
+
 const Main = () => {
   return (
     <div>
@@ -14,12 +16,10 @@ const Main = () => {
             new planets and help Nova get home.
           </p>
           <div id="login-buttons">
-            <a href="/auth/google">
-              <button className="btn btn-login">
-                {/* <img src="btn_google_signin_light_normal_web.png" /> */}
-                Login with Google
-              </button>
-            </a>
+            <button className="btn btn-login" onClick={signInWithGoogle}>
+               {/* <img src="btn_google_signin_light_normal_web.png" /> */}
+               Login with Google
+            </button>
             <a href="/auth/github">
               <button className="btn btn-login">Login with Github</button>
             </a>

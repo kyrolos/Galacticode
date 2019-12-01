@@ -4,13 +4,26 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Main, Game, UserAccount, Challenge, Home, Tutorial} from './components'
 import {me} from './store'
+import {auth} from '../firebase/firebase.utils'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
+  constructor(){
+    super();
+  }
+  unSubscripeFromAuth = null;
   componentDidMount() {
+    this.unSubscripeFromAuth = auth.onAuthStateChanged( user => {
+      this.props.isLoggedIn = user.id;
+      console.log(user)
+    })
     this.props.loadInitialData()
+  };
+
+  componentWillUnmount(){
+    this.unSubscripeFromAuth();
   }
 
   render() {
